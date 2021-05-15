@@ -42,7 +42,7 @@
         };
 
     in {
-      packages.${system}.minimal = naersk-lib.buildPackage {
+      packages.${system}.py = naersk-lib.buildPackage {
         src = ./.;
 
         buildInputs = with pkgs; [
@@ -54,7 +54,7 @@
         ];
       };
 
-      defaultPackage.${system} = self.packages.${system}.minimal;
+      defaultPackage.${system} = self.packages.${system}.py;
 
       devShell.${system} = pkgs.mkShell {
         RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
@@ -66,6 +66,7 @@
           rustfmt
 
           python38
+          libiconv
         ];
       };
     };
