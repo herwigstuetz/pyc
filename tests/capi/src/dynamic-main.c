@@ -43,10 +43,22 @@ int main() {
     CPyPort *ports;
     size_t num;
 
+    const char * pyso_name = "./libpython3.6m.so.1.0";
+    const char * so_name = "./target/debug/libpy.so";
     // load python with RTLD_GLOBAL so that libpy finds the python symbols
-    void * pyso = dlopen("./libpython3.6m.so.1.0", RTLD_GLOBAL | RTLD_NOW);
+    void * pyso = dlopen(pyso_name, RTLD_GLOBAL | RTLD_NOW);
 
-    void * so = dlopen("./target/debug/libpy.so", RTLD_LOCAL | RTLD_NOW);
+    void * so = dlopen(so_name, RTLD_LOCAL | RTLD_NOW);
+
+    if (!pyso) {
+        printf("Could not open %s\n", pyso_name);
+        exit(1);
+    }
+
+    if (!so) {
+        printf("Could not open %s\n", so_name);
+        exit(1);
+    }
 
     cpy_new = dlsym(so, "cpy_new");
     cpy_configure = dlsym(so, "cpy_configure");
