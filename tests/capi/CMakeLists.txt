@@ -17,3 +17,18 @@ target_link_libraries (
   )
 
 install(TARGETS ${PROJECT_NAME})
+
+
+add_executable(
+  ${PROJECT_NAME}-dynamic
+  src/dynamic-main.c
+  )
+
+target_link_libraries (
+  ${PROJECT_NAME}-dynamic
+  PRIVATE
+  cpy
+  dl
+  )
+
+install(TARGETS ${PROJECT_NAME}-dynamic)

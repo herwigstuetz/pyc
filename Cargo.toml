@@ -5,15 +5,14 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
-crate-type = ["staticlib"]
+crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
 dict_derive = "0.3.1"
 
 [dependencies.pyo3]
 version = "0.13.2"
-#features = ["auto-initialize", "extension-module"]
-features = ["extension-module"]
+features = ["extension-module"] # extension-module prevents linking to libpython
 
 [build-dependencies]
 cbindgen = "0.15"
